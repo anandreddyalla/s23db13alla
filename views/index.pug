@@ -4,7 +4,20 @@ block content
   h1= title
   p Welcome to Ananda Reddy Alla web application page working on pug within this lab #{title}
 
-  button(type="button", class="btn btn-secondary" onClick="doBump()") Press  me
+  button(type="button", class="btn btn-secondary" onclick="goFaster()") Press  me
+
+  div#faster Increase the speed
+
   
   script.
     console.log("running on http://localhost:3000/")
+
+  script.
+    var mph = 20;
+    var change = 1;
+
+    function goFaster() {
+        mph += change;
+        change += 1;
+        document.getElementById('faster').textContent = `MPH ${mph} with change ${change}`;
+    }
