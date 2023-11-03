@@ -1,5 +1,5 @@
 # s23db13alla
-Working on pug environment using new repository.
+Working on server side mongo data base.
 
 [Render Link](https://s23db13alla.onrender.com)
 
