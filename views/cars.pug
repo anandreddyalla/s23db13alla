@@ -3,22 +3,9 @@ extends layout
 block content
   h1= title
 
-  .container-fluid
-    .row
-      -
-      for car in cars
-        .col-sm-2
-          h3= `Make: ${car.make}`
-          p= `Model: ${car.model}`
-          p= `Year: ${car.year}`
-  br
-  h5= 'Buy'
-
-  div(class="container-fluid")
-    each car, index in cars
-      div(class="row", onclick=`buy(${index})`)
-        div(class="col-sm-2") <br>car #{index}: #{car.make} Model: #{car.model} Year: #{car.year}
-  script.
-    function buy(price){
-      alert('You purchased item ' + price);
-    }
+  .row
+    each car in results
+      .col-3
+        p Car Make: #{car.cars_make}
+        p Car Model: #{car.cars_model}
+        p Car Year: #{car.cars_year}
