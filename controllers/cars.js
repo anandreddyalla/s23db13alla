@@ -15,9 +15,9 @@ exports.cars_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: Cars delete DELETE ' + req.params.id);
 };
 
-exports.cars_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: Cars update PUT' + req.params.id);
-};
+// exports.cars_update_put = function (req, res) {
+//     res.send('NOT IMPLEMENTED: Cars update PUT' + req.params.id);
+// };
 
 
 exports.cars_list = async function (req, res) {
@@ -75,7 +75,7 @@ exports.cars_detail = async function (req, res) {
 
 
 exports.cars_update_put = async function (req, res) {
-    console.log(`Update on id ${req.params.id} with body ${JSON.stringify(req.body)}`);
+    //console.log(`Update on id ${req.params.id} with body ${JSON.stringify(req.body)}`);
 
     try {
         let toUpdate = await Car.findById(req.params.id);
@@ -93,3 +93,72 @@ exports.cars_update_put = async function (req, res) {
         res.status(500).send(`{"error": "${err}": Update for id ${req.params.id} failed`);
     }
 };
+
+
+exports.cars_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Car.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+   
+
+
+exports.cars_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await Car.findById( req.query.id)
+    res.render('carsdetail', 
+   { title: 'Cars Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   
+exports.cars_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('carscreate', { title: 'Cars Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+  
+exports.cars_update_Page = async function(req, res) {
+    //console.log("update view for item "+req.query.id)
+    try{
+    let result = await Car.findById(req.query.id)
+    console.log(result);
+    res.render('carsupdate', { title: 'Cars Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   
+exports.cars_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await Car.findById(req.query.id)
+    res.render('carsdelete', { title: 'Cars Delete', toShow: 
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+   

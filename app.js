@@ -74,6 +74,7 @@ const boardRouter = require('./routes/board');
 const resourceRouter = require('./routes/resource');
 
 
+
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -94,6 +95,10 @@ app.use('/cars', carsRouter);
 app.use('/board', boardRouter);
 
 app.use('/resource', resourceRouter);
+
+
+
+
 
 app.get('/choose', function (req, res) {
   res.render('choose', { title: 'Choose' });
