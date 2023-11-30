@@ -9,11 +9,18 @@ block content
   div#faster Increase the speed
   p
   a(href='/cars') View Cars
- 
+  br
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
 
+  if (user)
+    p You are currently logged in as #{user && user.username}
+    a(href="/cars") Take me to cars
+    br
+    a(href="/logout") Logout
 
-
-  
   script.
     console.log("running on http://localhost:3000/")
 
@@ -22,7 +29,7 @@ block content
     var change = 1;
 
     function goFaster() {
-        mph += change;
-        change += 1;
-        document.getElementById('faster').textContent = `MPH ${mph} with change ${change}`;
+      mph += change;
+      change += 1;
+      document.getElementById('faster').textContent = `MPH ${mph} with change ${change}`;
     }
